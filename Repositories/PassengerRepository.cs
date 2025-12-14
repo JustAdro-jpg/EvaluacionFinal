@@ -31,6 +31,9 @@ namespace ProyectoFinalTecWeb.Repositories
         public Task<Passenger?> GetByEmailAddress(string email) =>
             _ctx.Passengers.FirstOrDefaultAsync(u => u.Email == email);
 
+        public Task<Passenger?> GetByRefreshToken(string refreshToken) =>
+            _ctx.Passengers.FirstOrDefaultAsync(d => d.RefreshToken == refreshToken);
+
         public async Task<Passenger> GetOne(Guid id)
         {
             return await _ctx.Passengers.FirstOrDefaultAsync(x => x.Id == id);

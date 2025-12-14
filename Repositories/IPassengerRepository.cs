@@ -5,6 +5,7 @@ namespace ProyectoFinalTecWeb.Repositories
     public interface IPassengerRepository
     {
         Task<Passenger?> GetByEmailAddress(string email);
+        Task<Passenger?> GetByRefreshToken(string refreshToken);
         Task<Passenger?> GetTripsAsync(Guid id);
         Task<bool> ExistsAsync(Guid id);
         Task<int> SaveChangesAsync();

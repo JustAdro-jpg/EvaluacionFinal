@@ -32,6 +32,9 @@ namespace ProyectoFinalTecWeb.Repositories
         public Task<Driver?> GetByEmailAddress(string email) =>
             _ctx.Driveres.FirstOrDefaultAsync(u => u.Email == email);
 
+        public Task<Driver?> GetByRefreshToken(string refreshToken)=>
+            _ctx.Driveres.FirstOrDefaultAsync(d => d.RefreshToken == refreshToken);
+
         public async Task<Driver?> GetOne(Guid id)
         {
             return await _ctx.Driveres

@@ -5,6 +5,7 @@ namespace ProyectoFinalTecWeb.Repositories
     public interface IDriverRepository
     {
         Task<Driver?> GetByEmailAddress(string email);
+        Task<Driver?> GetByRefreshToken(string refreshToken);
         Task<Driver?> GetTripsAsync(Guid id);
         Task<bool> ExistsAsync(Guid id);
         Task<int> SaveChangesAsync();

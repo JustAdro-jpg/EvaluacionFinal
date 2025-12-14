@@ -1,4 +1,6 @@
-﻿namespace ProyectoFinalTecWeb.Entities.Dtos.DriverDto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProyectoFinalTecWeb.Entities.Dtos.DriverDto
 {
     public class RegisterDriverDto
     {

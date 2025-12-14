@@ -3,7 +3,6 @@
     public class Trip
     {
         public Guid Id { get; set; }
-
         public string Origin { get; set; }
         public string Destiny { get; set; }
         public int Price { get; set; }
