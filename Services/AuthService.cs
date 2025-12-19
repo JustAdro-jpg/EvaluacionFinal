@@ -6,11 +6,9 @@ using ProyectoFinalTecWeb.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ProyectoFinalTecWeb.Entities;
-using System.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace ProyectoFinalTecWeb.Services
 {
@@ -276,12 +274,38 @@ namespace ProyectoFinalTecWeb.Services
             return Base64UrlEncoder.Encode(bytes);
         }
 
-        public Task<(bool ok, string? response)> ForgotPasswordAsync(ForgotPasswordDto dto)
-        {
-        }
+        private static int MinutesSinceMidnight(DateTime now)
+            => (now.Hour * 60) + now.Minute;
 
-        public Task<(bool ok, string? response)> ResetPasswordAsync(ResetPasswordDto dto)
+        public async Task<(bool ok, string? response)> ForgotPasswordAsync(ForgotPasswordDto dto)
         {
+            var driver = await _drivers.GetByEmailAddress(dto.Email);
+            if (driver != null)
+            {
+                var now = DateTime.Now;
+                var token = MinutesSinceMidnight(now).ToString();
+
+                driver.PasswordResetToken = token;
+                driver.PasswordResetTokenCreatedAt = now;
+
+                await _drivers.Update(driver);
+                return (true, token);
+            }
+
+            var passenger = await _passengers.GetByEmailAddress(dto.Email);
+            if (passenger != null)
+            {
+                var now = DateTime.Now;
+                var token = MinutesSinceMidnight(now).ToString();
+
+                passenger.PasswordResetToken = token;
+                passenger.PasswordResetTokenCreatedAt = now;
+
+                await _passengers.Update(passenger);
+                return (true, token);
+            }
+
+            return (false, null);
         }
     }
 }
