@@ -275,5 +275,13 @@ namespace ProyectoFinalTecWeb.Services
             var bytes = RandomNumberGenerator.GetBytes(64);
             return Base64UrlEncoder.Encode(bytes);
         }
+
+        public Task<(bool ok, string? response)> ForgotPasswordAsync(ForgotPasswordDto dto)
+        {
+        }
+
+        public Task<(bool ok, string? response)> ResetPasswordAsync(ResetPasswordDto dto)
+        {
+        }
     }
 }

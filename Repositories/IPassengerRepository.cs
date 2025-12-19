@@ -18,5 +18,7 @@ namespace ProyectoFinalTecWeb.Repositories
         Task<Passenger> GetOne(Guid id);
         Task Update(Passenger passenger);
         Task Delete(Passenger passenger);
+
+        Task<Passenger?> GetByPasswordResetToken(string token);
     }
 }

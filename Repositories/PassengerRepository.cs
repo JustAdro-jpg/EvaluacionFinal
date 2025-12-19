@@ -64,5 +64,7 @@ namespace ProyectoFinalTecWeb.Repositories
             _ctx.Passengers.Update(passenger);
             await _ctx.SaveChangesAsync();
         }
+
+        public Task<Passenger?> GetByPasswordResetToken(string token) => _ctx.Drivers.FirstOrDefaultAsync(d => d.PasswordResetToken == token);
     }
 }
