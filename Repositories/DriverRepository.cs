@@ -24,7 +24,6 @@ namespace ProyectoFinalTecWeb.Repositories
         public Task<bool> ExistsAsync(Guid id) =>
             _ctx.Drivers.AnyAsync(s => s.Id == id);
 
-        
         public async Task<IEnumerable<Driver>> GetAll()
         {
             return await _ctx.Drivers
@@ -37,16 +36,16 @@ namespace ProyectoFinalTecWeb.Repositories
         public Task<Driver?> GetByEmailAddress(string email) =>
             _ctx.Drivers.FirstOrDefaultAsync(u => u.Email == email);
 
-        public Task<Driver?> GetByRefreshToken(string refreshToken)=>
+        public Task<Driver?> GetByRefreshToken(string refreshToken) =>
             _ctx.Drivers.FirstOrDefaultAsync(d => d.RefreshToken == refreshToken);
 
         public async Task<Driver?> GetOne(Guid id)
         {
             return await _ctx.Drivers
-         .Include(d => d.Trips) // Incluir Trips
-         .Include(d => d.Vehicles) // Incluir Vehicles
-             .ThenInclude(v => v.Model) // Y el Model de cada Vehicle
-         .FirstOrDefaultAsync(x => x.Id == id);
+                .Include(d => d.Trips)
+                .Include(d => d.Vehicles)
+                    .ThenInclude(v => v.Model)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Driver?> GetByIdWithTripsAsync(Guid id)
@@ -71,7 +70,6 @@ namespace ProyectoFinalTecWeb.Repositories
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-
         public Task<int> SaveChangesAsync() => _ctx.SaveChangesAsync();
 
         public async Task Update(Driver driver)
@@ -79,11 +77,5 @@ namespace ProyectoFinalTecWeb.Repositories
             _ctx.Drivers.Update(driver);
             await _ctx.SaveChangesAsync();
         }
-
-        public Task<Driver?> GetByPasswordResetToken(string token)
-        {
-            return _ctx.Drivers.FirstOrDefaultAsync(d => d.PasswordResetToken == token);
-        }
-
     }
 }

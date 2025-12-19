@@ -20,6 +20,5 @@ namespace ProyectoFinalTecWeb.Repositories
         Task Update(Driver driver);
         Task Delete(Driver driver);
 
-        Task<Driver?> GetByPasswordResetToken(string token);
     }
 }

@@ -8,6 +8,7 @@ namespace ProyectoFinalTecWeb.Repositories
     {
         private readonly AppDbContext _ctx;
         public PassengerRepository(AppDbContext ctx) { _ctx = ctx; }
+
         public async Task AddAsync(Passenger passenger)
         {
             _ctx.Passengers.Add(passenger);
@@ -45,6 +46,7 @@ namespace ProyectoFinalTecWeb.Repositories
                 .Include(p => p.Trips)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
+
         public async Task<IEnumerable<Passenger>> GetAllWithTripsAsync()
         {
             return await _ctx.Passengers
@@ -63,11 +65,6 @@ namespace ProyectoFinalTecWeb.Repositories
         {
             _ctx.Passengers.Update(passenger);
             await _ctx.SaveChangesAsync();
-        }
-
-        public Task<Passenger?> GetByPasswordResetToken(string token)
-        {
-            return _ctx.Passengers.FirstOrDefaultAsync(p => p.PasswordResetToken == token);
         }
     }
 }
